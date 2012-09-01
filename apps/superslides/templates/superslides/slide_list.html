@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block js %}
+
+{% endblock %}
+
+{% block css %}
+
+{% endblock %}
+{% block content %}
+{% for slide in object_list %}
+{% if slide.image %}
+  <img src="{{slide.image.url}}" />
+{% else %}
+  {% if slide.text %}
+  {{slide.text|safe}}
+  {% endif %}
+{% endif %}
+
+{% endblock %}

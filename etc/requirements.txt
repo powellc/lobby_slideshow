@@ -1,0 +1,5 @@
+argparse==1.2.1
+distribute==0.6.27
+https://github.com/davemerwin/django-slideshow/zipball/master
+#django-slideshow==0.0.6
+wsgiref==0.1.2
