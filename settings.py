@@ -8,7 +8,7 @@ PUBLIC_DIR = os.path.join(PROJECT_PATH, 'public')
 sys.path.insert(0, os.path.join(PROJECT_PATH, "apps"))
 
 ADMINS =  (
-    ('Chip Tol', 'brian.tol@5qcommunications.com'),
+    ('Colin Powell', 'colin.powell@gmail.com'),
 )
 MANAGERS = ADMINS
 
@@ -27,11 +27,14 @@ LANGUAGES = [
 ]
 
 MEDIA_ROOT = os.path.join(PUBLIC_DIR, 'media')
-MEDIA_URL = "/media/"
-ADMIN_MEDIA_PREFIX = "/static/admin/"
-
-STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PUBLIC_DIR, 'static')
+
+
+MEDIA_URL = "/media/"
+STATIC_URL = '/static/'
+
+ADMIN_MEDIA_PREFIX = os.path.join(PUBLIC_DIR, "static/admin")
+
 
 from imp import find_module
 STATICFILES_DIRS = (
@@ -91,6 +94,10 @@ INSTALLED_APPS = (
     'superslides',
     'easy_thumbnails',
 )
+
+SUPERSLIDES_ROOT = 'slides'
+SUPERSLIDES_SLIDE_SIZE = '1300x800'
+
 THUMBNAIL_ALIASES = {
         '': {
              'slideshow': {'size': (1300, 800), 'crop': False},

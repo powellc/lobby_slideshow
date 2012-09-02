@@ -23,33 +23,30 @@
 		<script type="text/javascript" src="{{STATIC_URL}}theme/supersized.shutter.min.js"></script>
 		
 		<script type="text/javascript">
-			
+      function update() {
+        window.json_dump = $.getJSON('{% url superslides_update %}', function(data) { return data });
+        document.write(window.json_dump);
+      }
+      setInterval('update()',1500)
+
 			jQuery(function($){
-        $.getJSON({% url superslides_update %}, function(data) {
-        });
-				
 				$.supersized({
-				
-					// Functionality
-					slideshow               :   1,			// Slideshow on/off
-					autoplay				:	1,			// Slideshow starts playing automatically
-					start_slide             :   1,			// Start slide (0 is random)
-					stop_loop				:	0,			// Pauses slideshow on last slide
-					slide_interval  :   5000,		// Length between transitions
-					transition      :   6, 			// 0-None, 1-Fade, 2-Slide Top, 3-Slide Right, 4-Slide Bottom, 5-Slide Left, 6-Carousel Right, 7-Carousel Left
-					transition_speed:	2000,		// Speed of transition
-					new_window			:	1,			// Image links open in new window/tab
-					image_protect			:	1,			// Disables image dragging and right click with Javascript
-															   
-					// Components							
-					thumbnail_navigation    :   0,			// Thumbnail navigation
-          progress_bar: 1,
-					slides 					:  	[{% for slide in object_list %}
-                                {% if slide.image %}
-														{image : '{{slide.image.slideshow.url}}', title : '{{image.caption}}', },
-                            {% endif %}
-                            {% endfor %}
-                            ],
+					slideshow       :1,			
+					autoplay				:1,			
+					start_slide     :1,
+					stop_loop				:0,
+					slide_interval  :5000,
+					transition      :1,
+					transition_speed:1500,
+					new_window			:1,
+					image_protect	  :1,
+          progress_bar    :1,
+					slides 					:window.json_dump
+          //[{% for slide in object_list %}
+          //                  {% if slide.image %}
+					//									{image : '{{slide.image.slideshow.url}}', title : '{{image.caption}}', },
+          //                  {% endif %}
+          //                  {% endfor %}],
 				});
 		    });
       </script>
