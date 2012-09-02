@@ -18,7 +18,7 @@ class JSONResponseMixin(object):
         data=[]
         for slide in context['slide_list']:
             data.append(
-              { 'image':slide.image.path,
+              { 'image':slide.image.url,
                 'caption':slide.caption})
         return json.dumps(data)
 
