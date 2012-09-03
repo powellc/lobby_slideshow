@@ -17,8 +17,9 @@ class JSONResponseMixin(object):
     def convert_context_to_json(self, context):
         data=[]
         for slide in context['slide_list']:
+            print slide.image
             data.append(
-              { 'image':slide.image.url,
+              { 'image':slide.image['slideshow'].url,
                 'caption':slide.caption})
         return json.dumps(data)
 
