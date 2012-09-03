@@ -6,7 +6,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-   (r'^tinymce/', include('tinymce.urls')),
    url(r'^admin/', include(admin.site.urls)),
    (r'^', include('superslides.urls')),
 ) + staticfiles_urlpatterns()
