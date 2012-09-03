@@ -19,7 +19,7 @@ class JSONResponseMixin(object):
         for slide in context['slide_list']:
             data.append(
               { 'image':slide.image['slideshow'].url,
-                'caption':slide.caption})
+                'title':slide.caption,})
         return json.dumps(data)
 
 class UpdateSlidesView(JSONResponseMixin, ListView):
