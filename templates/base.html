@@ -10,8 +10,9 @@
     <![endif]-->
     <style type="text/css">
       ul#demo-block{ margin:0 15px 15px 15px; }
-      ul#demo-block li{ margin:0 0 10px 0; padding:10px; display:inline; float:left; clear:both; color:#aaa; background:url('img/bg-black.png'); font:20pt Helvetica, Arial, sans-serif;}
+      ul#demo-block li{ margin:0 0 10px 0; padding:10px; display:inline; float:left; clear:both; color:white; font:20pt Helvetica, Arial, sans-serif;}
       ul#demo-block li a{ color:#eee; font-weight:bold; }
+      h3 { color:white; }
     </style>
 		<link rel="stylesheet" href="{{STATIC_URL}}css/supersized.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="{{STATIC_URL}}theme/supersized.shutter.css" type="text/css" media="screen" />
@@ -23,32 +24,25 @@
 		<script type="text/javascript" src="{{STATIC_URL}}theme/supersized.shutter.min.js"></script>
 		
 		<script type="text/javascript">
-      function update() {
-        window.json_dump = $.getJSON('{% url superslides_update %}', function(data) { return data });
-        document.write(window.json_dump);
-      }
-      setInterval('update()',1500)
-
+      window.static_slides = [{% for slide in object_list %} {% if slide.image %} {image : '{{slide.image.slideshow.url}}', title : '{{image.caption}}', },{% endif %}{% endfor %}]
 			jQuery(function($){
+        $.getJSON('{% url superslides_update %}', function(data) { window.slides = data; });
 				$.supersized({
 					slideshow       :1,			
 					autoplay				:1,			
-					start_slide     :1,
+					start_slide     :0,
 					stop_loop				:0,
-					slide_interval  :5000,
+					slide_interval  :8000,
 					transition      :1,
 					transition_speed:1500,
 					new_window			:1,
 					image_protect	  :1,
           progress_bar    :1,
-					slides 					:window.json_dump
-          //[{% for slide in object_list %}
-          //                  {% if slide.image %}
-					//									{image : '{{slide.image.slideshow.url}}', title : '{{image.caption}}', },
-          //                  {% endif %}
-          //                  {% endfor %}],
+					slides 					:window.static_slides,
 				});
-		    });
+		  });
+
+
       </script>
 </head>
 <body>

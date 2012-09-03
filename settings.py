@@ -40,7 +40,6 @@ from imp import find_module
 STATICFILES_DIRS = (
     os.path.join(os.path.abspath(find_module("debug_toolbar")[1]), 'media'),
     os.path.join(os.path.abspath(find_module("superslides")[1]), 'media'),
-    os.path.join(os.path.abspath(find_module("tinymce")[1]), 'static'),
     os.path.join(PROJECT_PATH, 'static'),
 )
 
