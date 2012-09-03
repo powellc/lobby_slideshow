@@ -99,4 +99,5 @@ class Command(NoArgsCommand):
                 slide = Slide.objects.create(name=filename, caption='')
                 slide.image = relative_path
                 slide.save()
+                img = slide.image['slideshow'].url # Hit this URL to pre-cache the image size
                 print '%s: Not in DB, added' % slide
