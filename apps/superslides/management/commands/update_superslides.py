@@ -24,7 +24,6 @@ from django.core.files import File
 
 from PIL import Image
 def is_image(filename):
-    print filename
     try:
         im=Image.open(filename)
         return True
@@ -73,28 +72,31 @@ class Command(NoArgsCommand):
         slides = Slide.objects.all()
 
         # First, check for slides in the dbs who's uploaded file has been deleted
-        # Or, if we made a mistake and created slide without an image
+        # Or, if we made a mistake and created a slide object without an image
         for slide in slides:
             try:
                 with open(slide.image.path) as file: pass
             except IOError:
+                print '%s: No longer in the directory, deleteing' % slide
                 slide.delete()
             except ValueError:
+                print '%s: No longer found, deleteing' % slide
                 slide.delete()
 
         # Next, compare the DB list with the directory list
         # Create any db objects if a new file exists
+        print 'Found %s images in the directory' % len(self.files)
         for file in self.files:
-            print file
+            filename, fileext = os.path.splitext(file)
+            relative_path = os.path.join(settings.SUPERSLIDES_ROOT, file)
             try:
                 # First, check if the slide exists in the DB
-                slide = Slide.objects.get(image=self.path+file)
+                slide = Slide.objects.get(image=relative_path)
                 print '%s: Already in DB' % slide
             except:
                 # If not, add it
                 file_path = os.path.join(self.path, file)
-                f = File(open(file_path, 'r'))
-                slide = Slide.objects.create(name=file.split('.')[0])
-                slide.image.save(file_path, f, True)
+                slide = Slide.objects.create(name=filename, caption='')
+                slide.image = relative_path
                 slide.save()
                 print '%s: Not in DB, added' % slide
