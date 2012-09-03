@@ -5,5 +5,5 @@ from superslides.models import Slide
 
 urlpatterns = patterns('',
     url(r'^$', view=ListView.as_view(model=Slide), name="superslides_index"),
-    url(r'^update-slides/$', view=UpdateSlidesView.as_view(), name="superslides_update"),
+    url(r'^slides.json$', view=UpdateSlidesView.as_view(), name="superslides_update"),
 )
