@@ -17,9 +17,12 @@ class JSONResponseMixin(object):
     def convert_context_to_json(self, context):
         data=[]
         for slide in context['slide_list']:
-            data.append(
-              { 'image':slide.image['slideshow'].url,
-                'title':slide.caption,})
+            try:
+                data.append(
+                  { 'image':slide.image['slideshow'].url,
+                    'title':slide.caption,})
+            except:
+                pass
         return json.dumps(data)
 
 class UpdateSlidesView(JSONResponseMixin, ListView):
