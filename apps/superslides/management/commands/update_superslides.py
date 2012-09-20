@@ -88,16 +88,20 @@ class Command(NoArgsCommand):
         print 'Found %s images in the directory' % len(self.files)
         for file in self.files:
             filename, fileext = os.path.splitext(file)
-            relative_path = os.path.join(settings.SUPERSLIDES_ROOT, file)
+            abs_path = os.path.join(self.path, file)
+            img_file = File(open(abs_path, 'r'))
+            relative_path = 'media/' + settings.SUPERSLIDES_ROOT
+            path_to_file = os.path.join(relative_path, file)
             try:
                 # First, check if the slide exists in the DB
-                slide = Slide.objects.get(image=relative_path)
+                slide = Slide.objects.get(image=path_to_file)
                 print '%s: Already in DB' % slide
             except:
                 # If not, add it
-                file_path = os.path.join(self.path, file)
                 slide = Slide.objects.create(name=filename, caption='')
-                slide.image = relative_path
+                slide.image.save(filename, img_file, save=True)
+                print slide.image
                 slide.save()
                 img = slide.image['slideshow'].url # Hit this URL to pre-cache the image size
+                print img
                 print '%s: Not in DB, added' % slide

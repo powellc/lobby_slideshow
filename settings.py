@@ -5,6 +5,7 @@ import sys
 gettext = lambda s: s
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 PUBLIC_DIR = os.path.join(PROJECT_PATH, 'public')
+LOBBY_HOME = os.path.abspath('/home/lobby')
 sys.path.insert(0, os.path.join(PROJECT_PATH, "apps"))
 
 ADMINS =  (
@@ -26,15 +27,15 @@ LANGUAGES = [
     ('en', gettext_noop('English')),
 ]
 
-MEDIA_ROOT = os.path.join(PUBLIC_DIR, 'media')
+MEDIA_ROOT = os.path.join(LOBBY_HOME, 'media')
 STATIC_ROOT = os.path.join(PUBLIC_DIR, 'static')
-
 
 MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = os.path.join(PUBLIC_DIR, "static/admin")
 
+THUMBNAIL_BASEDIR = 'cache'
 
 from imp import find_module
 STATICFILES_DIRS = (
