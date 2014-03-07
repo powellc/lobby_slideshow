@@ -5,7 +5,7 @@ import sys
 gettext = lambda s: s
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 PUBLIC_DIR = os.path.join(PROJECT_PATH, 'public')
-LOBBY_HOME = os.path.abspath('/home/lobby')
+LOBBY_HOME = os.path.join(PUBLIC_DIR, 'lobby')
 sys.path.insert(0, os.path.join(PROJECT_PATH, "apps"))
 
 ADMINS =  (
@@ -45,7 +45,7 @@ STATICFILES_DIRS = (
 )
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'lobby_adamsschool_com.wsgi.application'
+WSGI_APPLICATION = 'lobby_slideshow.wsgi.application'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
