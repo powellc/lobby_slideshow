@@ -17,14 +17,13 @@ def show_dbg_for_staff(request):
         return False
 
 DEBUG_TOOLBAR_CONFIG = {
-    'MEDIA_URL': STATIC_URL + 'debug_toolbar/',
     'SHOW_TOOLBAR_CALLBACK': show_dbg_for_staff,
     'INTERCEPT_REDIRECTS': False,
 }
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'HOST': '127.0.0.1',
         'NAME': 'staging_lobby',  # Or path to database file if using sqlite3.
         'USER': 'staging_lobby',
