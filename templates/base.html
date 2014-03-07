@@ -24,7 +24,7 @@
 		<script type="text/javascript" src="{{STATIC_URL}}theme/supersized.shutter.js"></script>
 		
 		<script type="text/javascript">
-                        window.slides = [{% for slide in object_list %} {% if slide.image %} {image : '{{slide.image.slideshow.url}}', title : '{{image.caption}}', },{% endif %}{% endfor %}]
+                        window.slides = [{% for slide in object_list %} {% if slide.image %} {image : '{{slide.image.url}}', title : '{{image.caption}}', },{% endif %}{% endfor %}]
 
 			jQuery(function($){
 				$.supersized({
